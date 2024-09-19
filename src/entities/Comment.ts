@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 import BaseEntity from "./BaseEntity";
 import User from "./User";
-import { Post } from "./Post";
+import Post from "./Post";
 import { Exclude, Expose } from "class-transformer";
 import Vote from "./Vote";
 import { makeId } from "../utils/helpers";

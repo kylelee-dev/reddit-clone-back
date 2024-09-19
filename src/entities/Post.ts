@@ -16,7 +16,7 @@ import Vote from "./Vote";
 import Comment from "./Comment";
 
 @Entity("posts")
-export class Post extends BaseEntity {
+export default class Post extends BaseEntity {
   @Column()
   identifier: string;
 

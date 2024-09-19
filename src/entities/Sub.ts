@@ -9,7 +9,7 @@ import {
 import BaseEntity from "./BaseEntity";
 import User from "./User";
 import { Expose } from "class-transformer";
-import { Post } from "./Post";
+import Post from "./Post";
 
 @Entity("subs")
 export default class Sub extends BaseEntity {
