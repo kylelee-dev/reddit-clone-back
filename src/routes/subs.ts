@@ -69,6 +69,20 @@ const topSubs = async (_: Request, res: Response) => {
     return res.status(500).json({ error: "Problem occurred." });
   }
 };
+
+const getSub = async(req: Request, res: Response) => {
+    const name = req.params.name;
+
+    try {
+        const sub = await Sub.findOneByOrFail({name});
+        
+        return res.json(sub);
+    } catch (error) {
+        console.log(error);
+        return res.status(404).json({error: "Community cannot be found."})
+    }
+}
+router.get("/:name", userMiddleware, getSub);
 router.post("/create", userMiddleware, authMiddleware, createSub);
 router.get("/sub/topSubs", topSubs);
 
