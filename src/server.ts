@@ -11,7 +11,7 @@ const app = express();
 dotenv.config();
 app.use(express.json());
 const origin = "http://localhost:3000";
-
+app.use(express.static("public"));
 app.use(
   cors({
     origin,
