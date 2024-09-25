@@ -79,6 +79,22 @@ const getSub = async (req: Request, res: Response) => {
   try {
     const sub = await Sub.findOneByOrFail({ name });
 
+    // Add posts to the sub
+    const posts = await Post.find({
+      where: {
+        subName: sub.name,
+      },
+      order: { createdAt: "DESC" },
+      relations: ["comments", "votes"]
+    });
+    sub.posts = posts;
+    if (res.locals.user) {
+        sub.posts.forEach((post) => {
+            post.setUserVote(res.locals.user)
+        })
+    }
+
+    console.log(sub)
     return res.json(sub);
   } catch (error) {
     console.log(error);
