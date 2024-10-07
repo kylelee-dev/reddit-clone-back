@@ -17,7 +17,7 @@ const vote = async (req: Request, res: Response) => {
   try {
     const user: User = res.locals.user;
     let post: Post = await Post.findOneByOrFail({ identifier, slug });
-    let vote: Vote | undefined;
+    let vote: Vote | null;
     let comment: Comment | undefined;
 
     if (commentIdentifier) {
@@ -25,12 +25,12 @@ const vote = async (req: Request, res: Response) => {
       comment = await Comment.findOneByOrFail({
         identifier: commentIdentifier,
       });
-      vote = await Vote.findOneByOrFail({
+      vote = await Vote.findOneBy({
         username: user.username,
         commentId: comment.id,
       });
     } else {
-      vote = await Vote.findOneByOrFail({
+      vote = await Vote.findOneBy({
         username: user.username,
         postId: post.id,
       });
